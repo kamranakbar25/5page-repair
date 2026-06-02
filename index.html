@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickFix Mobiles | Mobile, Laptop &amp; Electronics Repair in Patna</title>
+  <meta name="description" content="Professional mobile, laptop and electronics repair in Patna, Bihar. Screen replacement, battery issues, laptop servicing and software fixes with clear estimates. Get a free diagnosis on WhatsApp." />
+  <meta name="keywords" content="mobile repair Patna, laptop repair Patna, screen replacement Bihar, battery replacement, electronics repair, QuickFix" />
+  <meta name="author" content="QuickFix Mobiles" />
+  <meta property="og:title" content="QuickFix Mobiles | Repair Service Patna" />
+  <meta property="og:description" content="Mobile, laptop and electronics repair in Patna. Screen replacement, battery issues, laptop servicing — with clear estimates." />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230D0D0D'/><text y='23' x='5' font-size='20' fill='%2339FF14'>⚡</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'qf-black':   '#0D0D0D',
+            'qf-dark':    '#161616',
+            'qf-surface': '#1E1E1E',
+            'qf-border':  '#2A2A2A',
+            'qf-cream':   '#F5F0E8',
+            'qf-yellow':  '#F0C040',
+            'qf-green':   '#39FF14',
+            'qf-cyan':    '#00E5CC',
+            'qf-red':     '#FF4A2B',
+            'qf-grey':    '#888888',
+          },
+          fontFamily: {
+            display: ['Space Grotesk', 'sans-serif'],
+            mono:    ['IBM Plex Mono', 'monospace'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-qf-black font-body overflow-x-hidden">
+
+  <!-- ═══════════════════════════════════════════
+       PRELOADER
+  ═══════════════════════════════════════════ -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <div class="preloader-badge font-mono text-qf-green text-xs tracking-widest" id="pl-badge">SYSTEM INITIALIZING</div>
+      <div class="preloader-logo-wrap overflow-hidden my-3">
+        <div class="preloader-logo font-display font-bold text-qf-cream" id="pl-logo">QuickFix Mobiles</div>
+      </div>
+      <div class="preloader-sub font-mono text-qf-grey text-sm tracking-widest" id="pl-sub">Repair • Diagnose • Restore</div>
+      <div class="preloader-bar-wrap" aria-hidden="true">
+        <div class="preloader-bar-fill" id="pl-fill"></div>
+      </div>
+      <div class="preloader-status font-mono text-qf-grey text-xs tracking-widest" id="pl-status">LOADING...</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CUSTOM CURSOR
+  ═══════════════════════════════════════════ -->
+  <div id="cursor-dot"   aria-hidden="true"></div>
+  <div id="cursor-ring"  aria-hidden="true"></div>
+  <div id="cursor-label" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo" aria-label="QuickFix Mobiles Home">
+        <span class="logo-chip">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm3 1v6h8V6H6z"/></svg>
+        </span>
+        <span class="font-display font-bold text-qf-cream text-lg">QuickFix<span class="text-qf-green">.</span></span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="nav-links" role="list">
+        <a href="#services"  class="nav-link" role="listitem">Services</a>
+        <a href="#diagnosis" class="nav-link" role="listitem">Diagnosis</a>
+        <a href="#pricing"   class="nav-link" role="listitem">Pricing</a>
+        <a href="#faq"       class="nav-link" role="listitem">FAQ</a>
+        <a href="#contact"   class="nav-link" role="listitem">Contact</a>
+      </div>
+
+      <!-- CTA -->
+      <a href="#whatsapp-builder" id="nav-cta" class="nav-cta magnetic-btn" data-cursor-label="Diagnose" aria-label="Diagnose device on WhatsApp">
+        <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Diagnose on WhatsApp
+      </a>
+
+      <!-- Mobile hamburger -->
+      <button id="hamburger" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line ham-line--short"></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+      <div class="mobile-menu-inner">
+        <a href="#services"          class="mobile-link font-mono text-qf-grey">SERVICES</a>
+        <a href="#diagnosis"         class="mobile-link font-mono text-qf-grey">DIAGNOSIS</a>
+        <a href="#pricing"           class="mobile-link font-mono text-qf-grey">PRICING</a>
+        <a href="#faq"               class="mobile-link font-mono text-qf-grey">FAQ</a>
+        <a href="#contact"           class="mobile-link font-mono text-qf-grey">CONTACT</a>
+        <a href="#whatsapp-builder"  class="mobile-cta">
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Diagnose on WhatsApp
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section id="hero" class="hero-section">
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+
+    <div class="hero-container">
+      <!-- LEFT: Copy -->
+      <div class="hero-copy">
+
+        <div class="hero-ticket-tag font-mono text-qf-green text-xs" id="hero-ticket-tag" aria-label="Active service ticket">
+          <span class="ticket-pulse"></span>
+          TICKET #QFM-2024 — DIAGNOSTIC ACTIVE
+        </div>
+
+        <div class="hero-badge font-mono text-qf-yellow text-xs" id="hero-badge">
+          <span>●</span>&nbsp; PATNA, BIHAR — EST. SERVICE CENTER
+        </div>
+
+        <h1 class="hero-headline font-display font-bold text-qf-cream" aria-label="Device problems diagnosed before you waste another day">
+          <span class="h-line"><span class="h-inner">Device problems</span></span>
+          <span class="h-line"><span class="h-inner text-qf-green">diagnosed</span></span>
+          <span class="h-line"><span class="h-inner">before you waste</span></span>
+          <span class="h-line"><span class="h-inner">another day.</span></span>
+        </h1>
+
+        <p class="hero-sub font-body text-qf-grey" id="hero-sub">
+          Mobile, laptop and electronics repair in Patna — screen replacement, battery issues, laptop servicing and software fixes with clear estimates.
+        </p>
+
+        <div class="hero-ctas" id="hero-ctas">
+          <a href="#whatsapp-builder" class="btn-primary magnetic-btn" data-cursor-label="Diagnose" id="cta-primary">
+            <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Diagnose on WhatsApp
+          </a>
+          <a href="#services" class="btn-secondary magnetic-btn" data-cursor-label="Explore" id="cta-secondary">
+            View repair services
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 10h12M10 4l6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <div class="hero-stats" id="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num font-display font-bold text-qf-cream">500+</div>
+            <div class="stat-label font-mono text-qf-grey text-xs">DEVICES FIXED</div>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <div class="stat-num font-display font-bold text-qf-cream">24hr</div>
+            <div class="stat-label font-mono text-qf-grey text-xs">TURNAROUND</div>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <div class="stat-num font-display font-bold text-qf-cream">100%</div>
+            <div class="stat-label font-mono text-qf-grey text-xs">DATA SAFE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Diagnostic Command Center -->
+      <div class="hero-visual" aria-label="Diagnostic command center visual">
+
+        <!-- Phone schematic SVG -->
+        <div class="phone-wrap" aria-hidden="true">
+          <svg class="phone-svg" id="phone-svg" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Body -->
+            <rect class="svg-el" x="12" y="8"  width="176" height="384" rx="26" fill="none" stroke="#39FF14" stroke-width="1.8" opacity="0.45"/>
+            <!-- Screen -->
+            <rect class="svg-el" x="24" y="42" width="152" height="270" rx="8"  fill="none" stroke="#39FF14" stroke-width="1.4" opacity="0.35"/>
+            <!-- Notch / pill -->
+            <rect class="svg-el" x="78" y="20" width="44" height="8" rx="4" fill="none" stroke="#00E5CC" stroke-width="1.4" opacity="0.6"/>
+            <!-- Camera -->
+            <circle class="svg-el" cx="110" cy="24" r="4" fill="none" stroke="#00E5CC" stroke-width="1.4" opacity="0.6"/>
+            <!-- Home bar -->
+            <rect class="svg-el" x="78" y="368" width="44" height="6" rx="3" fill="#39FF14" opacity="0.35"/>
+            <!-- Charging port -->
+            <rect class="svg-el" x="84" y="382" width="32" height="5" rx="2.5" fill="none" stroke="#F0C040" stroke-width="1.4" opacity="0.55"/>
+            <!-- Vol up -->
+            <rect class="svg-el" x="5"  y="100" width="7" height="28" rx="3.5" fill="none" stroke="#888" stroke-width="1.4" opacity="0.35"/>
+            <!-- Vol down -->
+            <rect class="svg-el" x="5"  y="138" width="7" height="28" rx="3.5" fill="none" stroke="#888" stroke-width="1.4" opacity="0.35"/>
+            <!-- Power -->
+            <rect class="svg-el" x="188" y="118" width="7" height="36" rx="3.5" fill="none" stroke="#888" stroke-width="1.4" opacity="0.35"/>
+            <!-- Internal H line -->
+            <line class="svg-el" x1="34" y1="177" x2="166" y2="177" stroke="#39FF14" stroke-width="0.5" opacity="0.12" stroke-dasharray="5,5"/>
+            <!-- Internal V line -->
+            <line class="svg-el" x1="100" y1="52" x2="100" y2="302" stroke="#39FF14" stroke-width="0.5" opacity="0.12" stroke-dasharray="5,5"/>
+            <!-- Annotation dots -->
+            <circle class="svg-ann-dot" cx="100" cy="42"  r="3.5" fill="#00E5CC" opacity="0"/>
+            <circle class="svg-ann-dot" cx="100" cy="360" r="3.5" fill="#F0C040" opacity="0"/>
+            <circle class="svg-ann-dot" cx="100" cy="385" r="3.5" fill="#F0C040" opacity="0"/>
+            <circle class="svg-ann-dot" cx="78"  cy="24"  r="3.5" fill="#39FF14" opacity="0"/>
+          </svg>
+
+          <!-- Blueprint annotation labels -->
+          <div class="ann ann--screen  font-mono text-qf-cyan text-xs"  aria-hidden="true">DISPLAY UNIT</div>
+          <div class="ann ann--battery font-mono text-qf-yellow text-xs" aria-hidden="true">BATTERY CELL</div>
+          <div class="ann ann--port   font-mono text-qf-yellow text-xs" aria-hidden="true">CHARGING I/O</div>
+          <div class="ann ann--speaker font-mono text-qf-green text-xs"  aria-hidden="true">AUDIO UNIT</div>
+        </div>
+
+        <!-- Floating card 1: Repair Ticket -->
+        <div class="float-card card-ticket" id="fc1" aria-hidden="true">
+          <div class="fc-badge font-mono text-qf-green">#QFM-2847</div>
+          <div class="fc-status">ACTIVE</div>
+          <div class="fc-title font-display font-semibold text-qf-cream">Screen Replacement</div>
+          <div class="fc-sub font-mono text-qf-grey">iPhone 13 Pro</div>
+          <div class="fc-footer">
+            <span class="font-mono text-qf-grey">ETA</span>
+            <span class="font-mono text-qf-yellow">3–4 hrs</span>
+          </div>
+        </div>
+
+        <!-- Floating card 2: Diagnostic report -->
+        <div class="float-card card-diag" id="fc2" aria-hidden="true">
+          <div class="fc-label font-mono text-qf-cyan">DIAGNOSTIC REPORT</div>
+          <div class="diag-row"><span class="dot dot--red"></span><span class="font-mono text-qf-cream">Display — FAULT</span></div>
+          <div class="diag-row"><span class="dot dot--yellow"></span><span class="font-mono text-qf-cream">Battery — 67%</span></div>
+          <div class="diag-row"><span class="dot dot--green"></span><span class="font-mono text-qf-cream">Data — SAFE</span></div>
+        </div>
+
+        <!-- Floating card 3: Estimate slip -->
+        <div class="float-card card-estimate" id="fc3" aria-hidden="true">
+          <div class="fc-label font-mono text-qf-yellow">ESTIMATE SLIP</div>
+          <div class="est-row"><span class="font-mono text-qf-grey">Parts</span><span class="font-mono text-qf-cream">₹799</span></div>
+          <div class="est-row"><span class="font-mono text-qf-grey">Labour</span><span class="font-mono text-qf-cream">₹200</span></div>
+          <div class="est-total"><span class="font-mono text-qf-cream font-semibold">Total</span><span class="font-mono text-qf-green font-semibold">₹999</span></div>
+        </div>
+
+        <!-- Floating card 4: Queue token -->
+        <div class="float-card card-queue" id="fc4" aria-hidden="true">
+          <div class="fc-label font-mono text-qf-grey">SERVICE QUEUE</div>
+          <div class="queue-num font-display font-bold text-qf-cream">04</div>
+          <div class="font-mono text-qf-grey" style="font-size:10px">in queue</div>
+          <div class="queue-dots">
+            <span class="qdot qdot--green"></span>
+            <span class="qdot qdot--green"></span>
+            <span class="qdot qdot--yellow"></span>
+            <span class="qdot qdot--off"></span>
+          </div>
+        </div>
+
+      </div><!-- /hero-visual -->
+    </div><!-- /hero-container -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       TRUST STRIP
+  ═══════════════════════════════════════════ -->
+  <section class="trust-strip" aria-label="Services overview">
+    <div class="ticker-wrap" aria-hidden="true">
+      <div class="ticker-track" id="ticker">
+        <span class="tick-item"><span class="tick-dot tick-dot--green"></span>SCREEN REPAIR</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--cyan"></span>LAPTOP SERVICING</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--yellow"></span>DATA BACKUP</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--green"></span>PICKUP ENQUIRY</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--cyan"></span>WHATSAPP DIAGNOSIS</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--red"></span>BATTERY REPLACEMENT</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--yellow"></span>SOFTWARE REPAIR</span>
+        <span class="tick-sep">◆</span>
+        <!-- Duplicate for infinite loop -->
+        <span class="tick-item"><span class="tick-dot tick-dot--green"></span>SCREEN REPAIR</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--cyan"></span>LAPTOP SERVICING</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--yellow"></span>DATA BACKUP</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--green"></span>PICKUP ENQUIRY</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--cyan"></span>WHATSAPP DIAGNOSIS</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--red"></span>BATTERY REPLACEMENT</span>
+        <span class="tick-sep">◆</span>
+        <span class="tick-item"><span class="tick-dot tick-dot--yellow"></span>SOFTWARE REPAIR</span>
+        <span class="tick-sep">◆</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SERVICES
+  ═══════════════════════════════════════════ -->
+  <section id="services" class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag font-mono text-qf-green sf-item">SRV-001 — REPAIR MANIFEST</div>
+        <h2 class="section-headline font-display font-bold text-qf-cream sf-item">
+          Every repair.<br><span class="text-qf-yellow">Every device.</span>
+        </h2>
+      </div>
+
+      <div class="tickets-grid">
+
+        <!-- Ticket 1 -->
+        <article class="service-ticket sv-ticket" data-service="screen">
+          <div class="ticket-body">
+            <div class="ticket-header">
+              <span class="ticket-code font-mono text-qf-green">SRVC-001</span>
+              <span class="ticket-badge badge--red">HIGH DEMAND</span>
+            </div>
+            <h3 class="ticket-name font-display font-bold text-qf-cream">Screen Replacement</h3>
+            <p class="ticket-desc font-body text-qf-grey">Cracked display, touch not working, LCD damage — all screen types repaired with quality parts.</p>
+            <div class="ticket-devices font-mono text-qf-cyan">iPhone · Samsung · Oppo · Vivo · Realme</div>
+            <div class="ticket-footer">
+              <span class="font-mono text-qf-grey text-xs">FROM</span>
+              <span class="ticket-price font-display font-bold text-qf-green">₹999</span>
+            </div>
+            <div class="ticket-perf" aria-hidden="true"></div>
+            <div class="ticket-barcode" aria-hidden="true"></div>
+          </div>
+        </article>
+
+        <!-- Ticket 2 -->
+        <article class="service-ticket sv-ticket" data-service="battery">
+          <div class="ticket-body">
+            <div class="ticket-header">
+              <span class="ticket-code font-mono text-qf-green">SRVC-002</span>
+              <span class="ticket-badge badge--yellow">POPULAR</span>
+            </div>
+            <h3 class="ticket-name font-display font-bold text-qf-cream">Battery Replacement</h3>
+            <p class="ticket-desc font-body text-qf-grey">Fast draining, not charging, swollen battery — genuine cells, tested before handover.</p>
+            <div class="ticket-devices font-mono text-qf-cyan">All smartphone brands supported</div>
+            <div class="ticket-footer">
+              <span class="font-mono text-qf-grey text-xs">FROM</span>
+              <span class="ticket-price font-display font-bold text-qf-green">₹799</span>
+            </div>
+            <div class="ticket-perf" aria-hidden="true"></div>
+            <div class="ticket-barcode" aria-hidden="true"></div>
+          </div>
+        </article>
+
+        <!-- Ticket 3 -->
+        <article class="service-ticket sv-ticket" data-service="charging">
+          <div class="ticket-body">
+            <div class="ticket-header">
+              <span class="ticket-code font-mono text-qf-green">SRVC-003</span>
+              <span class="ticket-badge badge--cyan">QUICK FIX</span>
+            </div>
+            <h3 class="ticket-name font-display font-bold text-qf-cream">Charging Port Repair</h3>
+            <p class="ticket-desc font-body text-qf-grey">Loose connector, slow charging, not charging at all — micro-soldering precision repair.</p>
+            <div class="ticket-devices font-mono text-qf-cyan">USB-C · Lightning · Micro-USB</div>
+            <div class="ticket-footer">
+              <span class="font-mono text-qf-grey text-xs">FROM</span>
+              <span class="ticket-price font-display font-bold text-qf-green">₹499</span>
+            </div>
+            <div class="ticket-perf" aria-hidden="true"></div>
+            <div class="ticket-barcode" aria-hidden="true"></div>
+          </div>
+        </article>
+
+        <!-- Ticket 4 -->
+        <article class="service-ticket sv-ticket" data-service="laptop">
+          <div class="ticket-body">
+            <div class="ticket-header">
+              <span class="ticket-code font-mono text-qf-green">SRVC-004</span>
+              <span class="ticket-badge badge--green">RECOMMENDED</span>
+            </div>
+            <h3 class="ticket-name font-display font-bold text-qf-cream">Laptop Deep Cleaning</h3>
+            <p class="ticket-desc font-body text-qf-grey">Overheating, dust-clogged fans, slow performance — deep clean with thermal repaste.</p>
+            <div class="ticket-devices font-mono text-qf-cyan">Dell · HP · Lenovo · Asus · Acer</div>
+            <div class="ticket-footer">
+              <span class="font-mono text-qf-grey text-xs">FROM</span>
+              <span class="ticket-price font-display font-bold text-qf-green">₹699</span>
+            </div>
+            <div class="ticket-perf" aria-hidden="true"></div>
+            <div class="ticket-barcode" aria-hidden="true"></div>
+          </div>
+        </article>
+
+        <!-- Ticket 5 -->
+        <article class="service-ticket sv-ticket" data-service="software">
+          <div class="ticket-body">
+            <div class="ticket-header">
+              <span class="ticket-code font-mono text-qf-green">SRVC-005</span>
+              <span class="ticket-badge badge--yellow">FAST TURNAROUND</span>
+            </div>
+            <h3 class="ticket-name font-display font-bold text-qf-cream">Software Repair</h3>
+            <p class="ticket-desc font-body text-qf-grey">OS install, virus removal, driver issues, software corruption — full system restoration.</p>
+            <div class="ticket-devices font-mono text-qf-cyan">Windows · Android · iOS support</div>
+            <div class="ticket-footer">
+              <span class="font-mono text-qf-grey text-xs">FROM</span>
+              <span class="ticket-price font-display font-bold text-qf-green">₹399</span>
+            </div>
+            <div class="ticket-perf" aria-hidden="true"></div>
+            <div class="ticket-barcode" aria-hidden="true"></div>
+          </div>
+        </article>
+
+        <!-- Ticket 6 -->
+        <article class="service-ticket sv-ticket" data-service="data">
+          <div class="ticket-body">
+            <div class="ticket-header">
+              <span class="ticket-code font-mono text-qf-green">SRVC-006</span>
+              <span class="ticket-badge badge--red">CRITICAL</span>
+            </div>
+            <h3 class="ticket-name font-display font-bold text-qf-cream">Data Backup</h3>
+            <p class="ticket-desc font-body text-qf-grey">Photos, contacts, files — complete secure backup before any repair process begins.</p>
+            <div class="ticket-devices font-mono text-qf-cyan">Android · iPhone · Laptop</div>
+            <div class="ticket-footer">
+              <span class="font-mono text-qf-grey text-xs">INCLUDED</span>
+              <span class="ticket-price font-display font-bold text-qf-green">FREE</span>
+            </div>
+            <div class="ticket-perf" aria-hidden="true"></div>
+            <div class="ticket-barcode" aria-hidden="true"></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       HORIZONTAL SERVICE STRIP
+  ═══════════════════════════════════════════ -->
+  <section class="hscroll-outer" aria-label="Service manifest">
+    <div class="hscroll-label font-mono text-qf-grey container">
+      <span>// SERVICE MANIFEST SCROLL →</span>
+    </div>
+    <div class="hscroll-viewport" id="hscroll-viewport">
+      <div class="hscroll-track" id="hscroll-track">
+        <div class="hcard"><span class="hcard-num font-mono text-qf-green">01</span><h3 class="hcard-name font-display font-bold text-qf-cream">Mobile<br>Screen<br>Repair</h3></div>
+        <div class="hcard hcard--yellow"><span class="hcard-num font-mono text-qf-yellow">02</span><h3 class="hcard-name font-display font-bold text-qf-cream">Battery<br>Replace<br>ment</h3></div>
+        <div class="hcard hcard--cyan"><span class="hcard-num font-mono text-qf-cyan">03</span><h3 class="hcard-name font-display font-bold text-qf-cream">Laptop<br>Service<br>Center</h3></div>
+        <div class="hcard"><span class="hcard-num font-mono text-qf-green">04</span><h3 class="hcard-name font-display font-bold text-qf-cream">Speaker<br>&amp; Mic<br>Repair</h3></div>
+        <div class="hcard hcard--red"><span class="hcard-num font-mono text-qf-red">05</span><h3 class="hcard-name font-display font-bold text-qf-cream">Data<br>Recovery<br>&amp; Backup</h3></div>
+        <div class="hcard hcard--yellow"><span class="hcard-num font-mono text-qf-yellow">06</span><h3 class="hcard-name font-display font-bold text-qf-cream">Software<br>Install<br>ation</h3></div>
+        <div class="hcard hcard--cyan"><span class="hcard-num font-mono text-qf-cyan">07</span><h3 class="hcard-name font-display font-bold text-qf-cream">Pickup<br>&amp; Drop<br>Service</h3></div>
+        <div class="hcard hcard--glow"><span class="hcard-num font-mono text-qf-green">08</span><h3 class="hcard-name font-display font-bold text-qf-cream">WhatsApp<br>Diagnosis<br>Free</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PINNED DIAGNOSIS JOURNEY
+  ═══════════════════════════════════════════ -->
+  <section id="diagnosis" class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag font-mono text-qf-cyan sf-item">DIAG-001 — REPAIR PIPELINE</div>
+        <h2 class="section-headline font-display font-bold text-qf-cream sf-item">
+          How your device<br><span class="text-qf-cyan">gets fixed.</span>
+        </h2>
+      </div>
+
+      <div class="journey-wrap" role="list" aria-label="Repair journey steps">
+
+        <div class="journey-step js-item" role="listitem">
+          <div class="journey-indicator ji--cyan font-mono text-qf-cyan font-semibold">01</div>
+          <div class="journey-card">
+            <div class="jc-tag font-mono text-qf-cyan">STAGE — INTAKE</div>
+            <h3 class="jc-title font-display font-bold text-qf-cream">Issue Reported</h3>
+            <p class="jc-body font-body text-qf-grey">You describe the problem on WhatsApp or drop in. We log a service ticket immediately with your device details and issue description.</p>
+          </div>
+        </div>
+
+        <div class="journey-step journey-step--right js-item" role="listitem">
+          <div class="journey-card">
+            <div class="jc-tag font-mono text-qf-yellow">STAGE — ANALYSIS</div>
+            <h3 class="jc-title font-display font-bold text-qf-cream">Quick Diagnosis</h3>
+            <p class="jc-body font-body text-qf-grey">Technician runs a full hardware + software check. We identify root cause — not just symptoms. Entire process takes under 30 minutes.</p>
+          </div>
+          <div class="journey-indicator ji--yellow font-mono text-qf-yellow font-semibold">02</div>
+        </div>
+
+        <div class="journey-step js-item" role="listitem">
+          <div class="journey-indicator ji--green font-mono text-qf-green font-semibold">03</div>
+          <div class="journey-card">
+            <div class="jc-tag font-mono text-qf-green">STAGE — ESTIMATE</div>
+            <h3 class="jc-title font-display font-bold text-qf-cream">Estimate Shared</h3>
+            <p class="jc-body font-body text-qf-grey">Clear, itemised cost estimate sent on WhatsApp. No hidden charges. You approve before we start. Zero surprise billing.</p>
+          </div>
+        </div>
+
+        <div class="journey-step journey-step--right js-item" role="listitem">
+          <div class="journey-card">
+            <div class="jc-tag font-mono text-qf-red">STAGE — EXECUTION</div>
+            <h3 class="jc-title font-display font-bold text-qf-cream">Repair Starts</h3>
+            <p class="jc-body font-body text-qf-grey">Certified technician works on your device. Quality parts, micro-soldering precision, tested thoroughly post-repair before returning.</p>
+          </div>
+          <div class="journey-indicator ji--red font-mono text-qf-red font-semibold">04</div>
+        </div>
+
+        <div class="journey-step js-item" role="listitem">
+          <div class="journey-indicator ji--done font-mono text-qf-black font-bold">✓</div>
+          <div class="journey-card journey-card--done">
+            <div class="jc-tag font-mono text-qf-green">STAGE — DELIVERY</div>
+            <h3 class="jc-title font-display font-bold text-qf-cream">Pickup or Delivery</h3>
+            <p class="jc-body font-body text-qf-grey">Device ready. Pick up in-store or request doorstep delivery. Warranty slip included. Repair satisfaction guaranteed.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PRICING RECEIPT
+  ═══════════════════════════════════════════ -->
+  <section id="pricing" class="section-pad pricing-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag font-mono text-qf-yellow sf-item">EST-001 — PRICE MANIFEST</div>
+        <h2 class="section-headline font-display font-bold text-qf-cream sf-item">
+          Honest pricing.<br><span class="text-qf-yellow">No surprises.</span>
+        </h2>
+      </div>
+
+      <div class="pricing-layout">
+        <!-- Receipt -->
+        <div class="receipt-wrap sf-item">
+          <div class="receipt font-mono" role="table" aria-label="Service pricing">
+            <div class="receipt-head">
+              <div class="rh-shop">QUICKFIX MOBILES</div>
+              <div class="rh-loc">PATNA, BIHAR</div>
+              <div class="rh-divider">────────────────────</div>
+              <div class="rh-title font-bold">SERVICE ESTIMATE</div>
+              <div class="rh-num">RECEIPT #QFM-2024</div>
+            </div>
+            <div class="receipt-body" role="rowgroup">
+              <div class="r-row rcpt-line" role="row"><span role="cell">Screen Replacement</span><span role="cell" class="font-bold">₹999+</span></div>
+              <div class="r-sep" aria-hidden="true"></div>
+              <div class="r-row rcpt-line" role="row"><span role="cell">Battery Replacement</span><span role="cell" class="font-bold">₹799+</span></div>
+              <div class="r-sep" aria-hidden="true"></div>
+              <div class="r-row rcpt-line" role="row"><span role="cell">Charging Port Repair</span><span role="cell" class="font-bold">₹499+</span></div>
+              <div class="r-sep" aria-hidden="true"></div>
+              <div class="r-row rcpt-line" role="row"><span role="cell">Laptop Deep Cleaning</span><span role="cell" class="font-bold">₹699+</span></div>
+              <div class="r-sep" aria-hidden="true"></div>
+              <div class="r-row rcpt-line" role="row"><span role="cell">Software Setup</span><span role="cell" class="font-bold">₹399+</span></div>
+              <div class="r-sep" aria-hidden="true"></div>
+              <div class="r-row rcpt-line" role="row"><span role="cell">Data Backup</span><span role="cell" class="font-bold receipt-free">FREE</span></div>
+            </div>
+            <div class="receipt-foot">
+              <div class="rf-divider">────────────────────</div>
+              <div class="rf-note">* Final price depends on device model<br>and part availability.</div>
+              <div class="rf-note">Get exact estimate on WhatsApp.</div>
+              <div class="rf-divider">────────────────────</div>
+              <div class="rf-thanks">THANK YOU — QUICKFIX MOBILES</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing notes -->
+        <div class="pricing-notes">
+          <div class="pnote sf-item">
+            <div class="pnote-icon pnote-icon--green" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </div>
+            <div>
+              <div class="pnote-title font-display font-semibold text-qf-cream">Estimate before repair</div>
+              <div class="pnote-body font-body text-qf-grey">You always know the cost before we touch your device. No work starts without your approval.</div>
+            </div>
+          </div>
+          <div class="pnote sf-item">
+            <div class="pnote-icon pnote-icon--yellow" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+            </div>
+            <div>
+              <div class="pnote-title font-display font-semibold text-qf-cream">No hidden charges</div>
+              <div class="pnote-body font-body text-qf-grey">What we quote is what you pay. Parts + labour all included in the estimate.</div>
+            </div>
+          </div>
+          <div class="pnote sf-item">
+            <div class="pnote-icon pnote-icon--cyan" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
+            </div>
+            <div>
+              <div class="pnote-title font-display font-semibold text-qf-cream">Warranty included</div>
+              <div class="pnote-body font-body text-qf-grey">All repairs come with a service warranty. If it fails, we fix it at no charge.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       DEVICE ISSUE CHECKLIST
+  ═══════════════════════════════════════════ -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag font-mono text-qf-red sf-item">ISSUE-001 — DEVICE SCAN</div>
+        <h2 class="section-headline font-display font-bold text-qf-cream sf-item">
+          Recognize the<br><span class="text-qf-red">problem?</span>
+        </h2>
+      </div>
+
+      <div class="checklist-grid" role="group" aria-label="Device issue checklist">
+
+        <div class="cl-item cl-item--display" role="checkbox" aria-checked="false" tabindex="0" data-issue="display">
+          <div class="cl-check" aria-hidden="true">
+            <svg class="cl-check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </div>
+          <div>
+            <div class="cl-title font-display font-semibold text-qf-cream">Display broken / cracked</div>
+            <div class="cl-sub font-mono text-qf-grey">Touch not responding · Dark spots · Shattered glass</div>
+          </div>
+        </div>
+
+        <div class="cl-item cl-item--battery" role="checkbox" aria-checked="false" tabindex="0" data-issue="battery">
+          <div class="cl-check" aria-hidden="true">
+            <svg class="cl-check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </div>
+          <div>
+            <div class="cl-title font-display font-semibold text-qf-cream">Battery draining fast</div>
+            <div class="cl-sub font-mono text-qf-grey">Dead in 2–3 hours · Overheating · Swollen back</div>
+          </div>
+        </div>
+
+        <div class="cl-item cl-item--heat" role="checkbox" aria-checked="false" tabindex="0" data-issue="heat">
+          <div class="cl-check" aria-hidden="true">
+            <svg class="cl-check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </div>
+          <div>
+            <div class="cl-title font-display font-semibold text-qf-cream">Overheating</div>
+            <div class="cl-sub font-mono text-qf-grey">Gets hot fast · Fan always running · Throttling</div>
+          </div>
+        </div>
+
+        <div class="cl-item cl-item--charging" role="checkbox" aria-checked="false" tabindex="0" data-issue="charging">
+          <div class="cl-check" aria-hidden="true">
+            <svg class="cl-check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </div>
+          <div>
+            <div class="cl-title font-display font-semibold text-qf-cream">Charging issue</div>
+            <div class="cl-sub font-mono text-qf-grey">Loose port · Slow charging · Not charging at all</div>
+          </div>
+        </div>
+
+        <div class="cl-item cl-item--slow" role="checkbox" aria-checked="false" tabindex="0" data-issue="slow">
+          <div class="cl-check" aria-hidden="true">
+            <svg class="cl-check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </div>
+          <div>
+            <div class="cl-title font-display font-semibold text-qf-cream">Slow laptop / freezing</div>
+            <div class="cl-sub font-mono text-qf-grey">Boot takes forever · Apps crash · Lag and stutter</div>
+          </div>
+        </div>
+
+        <div class="cl-item cl-item--data" role="checkbox" aria-checked="false" tabindex="0" data-issue="data">
+          <div class="cl-check" aria-hidden="true">
+            <svg class="cl-check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </div>
+          <div>
+            <div class="cl-title font-display font-semibold text-qf-cream">Data backup needed</div>
+            <div class="cl-sub font-mono text-qf-grey">Before repair · Transfer to new phone · Secure backup</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cl-cta sf-item">
+        <p class="font-body text-qf-grey mb-4">Checked something above? Tell us on WhatsApp for a quick estimate.</p>
+        <a href="#whatsapp-builder" class="btn-primary magnetic-btn" data-cursor-label="Diagnose">Get free diagnosis →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       WHATSAPP DIAGNOSIS BUILDER
+  ═══════════════════════════════════════════ -->
+  <section id="whatsapp-builder" class="section-pad wa-builder-section">
+    <div class="container-sm">
+      <div class="section-header text-center">
+        <div class="section-tag font-mono text-qf-green sf-item" style="justify-content:center">WA-001 — DIAGNOSIS TERMINAL</div>
+        <h2 class="section-headline font-display font-bold text-qf-cream sf-item" style="text-align:center">
+          Build your repair<br><span class="text-qf-green">ticket now.</span>
+        </h2>
+        <p class="font-body text-qf-grey mt-2 sf-item" style="text-align:center">Select your options — we'll generate a pre-filled WhatsApp message.</p>
+      </div>
+
+      <!-- Terminal window -->
+      <div class="terminal sf-item" role="form" aria-label="Repair ticket builder">
+        <!-- Window chrome -->
+        <div class="term-chrome" aria-hidden="true">
+          <span class="term-dot term-dot--red"></span>
+          <span class="term-dot term-dot--yellow"></span>
+          <span class="term-dot term-dot--green"></span>
+          <span class="term-title font-mono">quickfix-diagnosis.sh — NEW REPAIR TICKET</span>
+        </div>
+
+        <div class="term-body">
+
+          <!-- Step 1: Device -->
+          <div class="term-step">
+            <div class="term-prompt font-mono"><span class="term-dollar">$</span> SELECT DEVICE TYPE</div>
+            <div class="term-options" id="device-options" role="radiogroup" aria-label="Device type">
+              <button class="topt" data-group="device" data-value="smartphone" aria-pressed="false">📱 Smartphone</button>
+              <button class="topt" data-group="device" data-value="laptop"     aria-pressed="false">💻 Laptop</button>
+              <button class="topt" data-group="device" data-value="tablet"     aria-pressed="false">📟 Tablet</button>
+              <button class="topt" data-group="device" data-value="other"      aria-pressed="false">🔧 Other</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Issue -->
+          <div class="term-step">
+            <div class="term-prompt font-mono"><span class="term-dollar" style="color:var(--qf-yellow)">$</span> <span style="color:var(--qf-yellow)">SELECT PRIMARY ISSUE</span></div>
+            <div class="term-options" id="issue-options" role="radiogroup" aria-label="Issue type">
+              <button class="topt topt--yellow" data-group="issue" data-value="screen"      aria-pressed="false">🖥️ Screen broken</button>
+              <button class="topt topt--yellow" data-group="issue" data-value="battery"     aria-pressed="false">🔋 Battery issue</button>
+              <button class="topt topt--yellow" data-group="issue" data-value="charging"    aria-pressed="false">⚡ Charging port</button>
+              <button class="topt topt--yellow" data-group="issue" data-value="software"    aria-pressed="false">💾 Software issue</button>
+              <button class="topt topt--yellow" data-group="issue" data-value="overheating" aria-pressed="false">🌡️ Overheating</button>
+              <button class="topt topt--yellow" data-group="issue" data-value="data"        aria-pressed="false">📁 Data backup</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Urgency -->
+          <div class="term-step">
+            <div class="term-prompt font-mono"><span class="term-dollar" style="color:var(--qf-cyan)">$</span> <span style="color:var(--qf-cyan)">SET PRIORITY FLAG</span></div>
+            <div class="term-options term-options--row" id="urgency-options" role="radiogroup" aria-label="Urgency">
+              <button class="topt topt--pill" data-group="urgency" data-value="urgent"   aria-pressed="false">🔴 URGENT — Today</button>
+              <button class="topt topt--pill" data-group="urgency" data-value="soon"     aria-pressed="false">🟡 SOON — This week</button>
+              <button class="topt topt--pill" data-group="urgency" data-value="flexible" aria-pressed="false">⚪ FLEXIBLE — No rush</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Name -->
+          <div class="term-step">
+            <div class="term-prompt font-mono"><span class="term-dollar">$</span> ENTER YOUR NAME</div>
+            <div class="term-input-wrap">
+              <span class="term-cursor-char font-mono text-qf-green" aria-hidden="true">▶</span>
+              <input type="text" id="user-name" class="term-input font-mono" placeholder="Type your name here..." autocomplete="given-name" aria-label="Your name" />
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div class="term-preview" id="term-preview" aria-live="polite" aria-label="Generated repair ticket">
+            <div class="font-mono text-qf-green" style="font-size:11px;margin-bottom:8px">// GENERATED REPAIR TICKET</div>
+            <pre class="font-mono text-qf-cream term-pre" id="ticket-text"></pre>
+          </div>
+
+          <!-- Actions -->
+          <div class="term-actions">
+            <button id="generate-btn" class="btn-generate magnetic-btn" aria-label="Generate repair ticket">
+              Generate Ticket
+            </button>
+            <a id="wa-send-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-wa-send magnetic-btn" style="display:none" data-cursor-label="Send" aria-label="Send diagnosis on WhatsApp">
+              <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Send on WhatsApp
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════ -->
+  <section id="faq" class="section-pad">
+    <div class="container-sm">
+      <div class="section-header">
+        <div class="section-tag font-mono text-qf-grey sf-item">FAQ-001 — HELP DOCS</div>
+        <h2 class="section-headline font-display font-bold text-qf-cream sf-item">
+          Common<br><span class="text-qf-grey">questions.</span>
+        </h2>
+      </div>
+
+      <div class="faq-list" role="list">
+
+        <div class="faq-item faq-fade" role="listitem">
+          <button class="faq-q font-display font-semibold text-qf-cream" aria-expanded="false">
+            Do you repair all phone brands?
+            <span class="faq-chevron" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-a font-body text-qf-grey">
+            Yes! We repair all major smartphone brands — iPhone, Samsung, Oppo, Vivo, Realme, Xiaomi, OnePlus, Motorola, and more. If your phone can be repaired, we can repair it.
+          </div>
+        </div>
+
+        <div class="faq-item faq-fade" role="listitem">
+          <button class="faq-q font-display font-semibold text-qf-cream" aria-expanded="false">
+            Do you service laptops?
+            <span class="faq-chevron" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-a font-body text-qf-grey">
+            Absolutely. We service all laptop brands — Dell, HP, Lenovo, Asus, Acer, Apple MacBook and more. Deep cleaning, thermal repaste, software reinstall, hardware upgrades and everything in between.
+          </div>
+        </div>
+
+        <div class="faq-item faq-fade" role="listitem">
+          <button class="faq-q font-display font-semibold text-qf-cream" aria-expanded="false">
+            Can I get an estimate on WhatsApp?
+            <span class="faq-chevron" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-a font-body text-qf-grey">
+            Yes! Share your device model and issue on WhatsApp and we'll send you an estimate within 30 minutes. Use our diagnosis builder above to generate a pre-filled message instantly.
+          </div>
+        </div>
+
+        <div class="faq-item faq-fade" role="listitem">
+          <button class="faq-q font-display font-semibold text-qf-cream" aria-expanded="false">
+            Do you offer pickup and drop?
+            <span class="faq-chevron" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-a font-body text-qf-grey">
+            Yes, we offer pickup and drop service within Patna. Enquire on WhatsApp with your address and we'll arrange it. Pickup is usually scheduled the same day.
+          </div>
+        </div>
+
+        <div class="faq-item faq-fade" role="listitem">
+          <button class="faq-q font-display font-semibold text-qf-cream" aria-expanded="false">
+            Is my data safe during repair?
+            <span class="faq-chevron" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-a font-body text-qf-grey">
+            100% safe. We take a full data backup before starting any repair. Your photos, contacts, and files are secured before we touch the hardware. We don't access your personal data — ever.
+          </div>
+        </div>
+
+        <div class="faq-item faq-fade" role="listitem">
+          <button class="faq-q font-display font-semibold text-qf-cream" aria-expanded="false">
+            How long does repair take?
+            <span class="faq-chevron" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-a font-body text-qf-grey">
+            Most common repairs (screen, battery, charging port) are done within 1–4 hours. Laptop servicing and software repairs may take 24–48 hours. We always provide an ETA before starting.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FINAL CTA
+  ═══════════════════════════════════════════ -->
+  <section id="contact" class="final-cta-section section-pad">
+    <div class="final-bg-text font-display font-black text-qf-green" aria-hidden="true">FIX</div>
+    <div class="container text-center" style="position:relative;z-index:2">
+      <div class="section-tag font-mono text-qf-green sf-item" style="justify-content:center">● QUICKFIX MOBILES — PATNA, BIHAR</div>
+      <h2 class="final-headline font-display font-bold text-qf-cream sf-item">
+        Tell us the issue.<br><span class="text-qf-green">Get a quick</span><br>repair estimate.
+      </h2>
+      <p class="font-body text-qf-grey sf-item" style="margin:1.5rem auto 2.5rem;max-width:32rem">
+        No waiting. No guessing. Send a WhatsApp and get an estimate in under 30 minutes.
+      </p>
+      <div class="sf-item">
+        <a href="#whatsapp-builder" class="btn-primary btn-large magnetic-btn" data-cursor-label="Diagnose">
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Start diagnosis on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="font-display font-bold text-qf-cream" style="font-size:1.1rem;margin-bottom:0.5rem">QuickFix Mobiles</div>
+          <div class="font-mono text-qf-grey" style="font-size:12px;line-height:1.7">Mobile, laptop and electronics<br>repair service in Patna, Bihar.</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-label font-mono text-qf-grey">SERVICES</div>
+          <div class="footer-links">
+            <span class="footer-link font-body text-qf-grey">Screen Replacement</span>
+            <span class="footer-link font-body text-qf-grey">Battery Replacement</span>
+            <span class="footer-link font-body text-qf-grey">Laptop Servicing</span>
+            <span class="footer-link font-body text-qf-grey">Data Backup</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-label font-mono text-qf-grey">CONTACT</div>
+          <div class="footer-links">
+            <span class="footer-link font-body text-qf-grey">📍 Patna, Bihar, India</span>
+            <span class="footer-link font-body text-qf-grey">💬 WhatsApp Diagnosis</span>
+            <span class="footer-link font-body text-qf-grey">⏰ Mon–Sat: 9am–8pm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="demo-badge" aria-label="Demo website notice">
+          <span class="demo-dot" aria-hidden="true"></span>
+          <span class="font-mono text-qf-yellow" style="font-size:11px">5PAGE DEMO — This is a demo website for repair shops and electronics service centers.</span>
+        </div>
+        <div class="font-mono text-qf-grey" style="font-size:11px">
+          Built by <a href="#" class="text-qf-green" style="text-decoration:underline">5Page</a> · Web design for local businesses
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky WhatsApp CTA -->
+  <div id="sticky-wa" aria-label="Quick WhatsApp diagnosis button">
+    <a href="#whatsapp-builder" class="sticky-wa-btn magnetic-btn" data-cursor-label="Diagnose">
+      <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Quick Diagnosis
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
