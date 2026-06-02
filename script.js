@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger, TextPlugin);
 /* ── Global State ─────────────────────────────────── */
 const IS_MOBILE        = window.innerWidth < 768;
 const REDUCED_MOTION   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const WHATSAPP_NUMBER  = '919100000000'; // ← Replace with real number
+const WHATSAPP_NUMBER  = '918340130295'; // ← Replace with real number
 
 /* ─────────────────────────────────────────────────────
    PRELOADER
